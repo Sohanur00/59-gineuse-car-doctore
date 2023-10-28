@@ -1,5 +1,5 @@
 const express = require('express')
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const cors = require('cors');
 require('dotenv').config()
 const app = express()
@@ -39,6 +39,26 @@ app.get('/services',async(req,res) =>{
     const result = await cursor.toArray();
     res.send(result)
 })
+
+
+app.get('/services/:id',async(req,res)=>{
+
+const id = req.params.id;
+const query = {_id : new ObjectId(id)}
+
+
+const options = {
+
+  // Include only the `title` and `imdb` fields in the returned document
+  projection: {title: 1, price: 1, service_id: 1  },
+};
+
+const result = await serviceCollection.findOne(query,options)
+res.send(result) 
+
+})
+
+
 
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
