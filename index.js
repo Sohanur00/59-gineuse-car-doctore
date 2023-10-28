@@ -31,7 +31,7 @@ async function run() {
 
 
 const serviceCollection = client.db('carDoctore').collection('Services')
-
+const bookingCollection =client.db('carDoctore').collection("checkout")
 
 app.get('/services',async(req,res) =>{
 
@@ -56,6 +56,18 @@ const options = {
 const result = await serviceCollection.findOne(query,options)
 res.send(result) 
 
+})
+
+
+// booking
+
+app.post('/checkout',async(res,req) =>{
+
+  const booking = req.body;
+  console.log(booking)
+
+  // const result = await bookingCollection.insertOne(booking)
+  // req.send(result)
 })
 
 
