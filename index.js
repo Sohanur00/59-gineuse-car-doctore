@@ -61,13 +61,13 @@ res.send(result)
 
 // booking
 
-app.post('/checkout',async(res,req) =>{
+app.post('/checkout',async(req ,res) =>{
 
   const booking = req.body;
   console.log(booking)
 
-  // const result = await bookingCollection.insertOne(booking)
-  // req.send(result)
+  const bookingresult = await bookingCollection.insertOne(booking)
+  res.send(bookingresult)
 })
 
 
